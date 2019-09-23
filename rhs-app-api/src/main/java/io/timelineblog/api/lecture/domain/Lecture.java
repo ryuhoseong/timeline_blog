@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +37,31 @@ public class Lecture {
 
   @UpdateTimestamp
   private LocalDateTime updDtt;
+
+  @Builder
+  public Lecture(String title, String subTitle, String content, String creId) {
+
+    this.title      = title;
+
+    this.subTitle   = subTitle;
+
+    this.content    = content;
+    
+    this.creId      = creId;
+
+  }
+
+  public Lecture update(long id, String title, String subTitle, String contentc) {
+   
+    this.id         = id;
+    
+    this.title      = title;
+
+    this.subTitle   = subTitle;
+
+    this.content    = contentc;
+
+    return this;
+  }
 
 }

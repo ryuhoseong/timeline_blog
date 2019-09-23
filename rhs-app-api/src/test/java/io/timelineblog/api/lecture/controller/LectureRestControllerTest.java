@@ -17,8 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.service.LectureService;
+import io.timelineblog.api.lecture.service.dto.LectureDto;
 
 @ActiveProfiles("local")
 @RunWith(SpringRunner.class)
@@ -32,16 +32,16 @@ public class LectureRestControllerTest {
   private LectureService lectureService;
   
   @Test
-  public void test() throws Exception {
+  public void save() throws Exception {
     
-    Lecture lecture = new Lecture();
+    LectureDto.Create lecture = new LectureDto.Create();
 
     lecture.setTitle("스프링 프레임워크 핵심 기술");
     lecture.setSubTitle("ApplicationContext와 다양한 빈 설정방법");
     lecture.setContent("applicationContext");
     lecture.setCreId("QA");
-
-    given(lectureService.save(any(Lecture.class))).willReturn(lecture);
+    
+    given(lectureService.save(any(LectureDto.Create.class))).willReturn(lecture.toEntity());
     
     ObjectMapper objectMapper = new ObjectMapper();
     String reqlectureStr  = objectMapper.writeValueAsString(lecture);
