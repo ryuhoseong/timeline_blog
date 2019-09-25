@@ -46,7 +46,9 @@ public class LectureRestController {
     }
     
     @PutMapping("/lecture/{id}")
-    public ResponseEntity<Object> update(@RequestBody @Valid LectureDto.Update lecture){
+    public ResponseEntity<Object> update(@RequestBody @Valid LectureDto.Update lecture, @PathVariable("id") long id){
+      
+      lecture.setId(id);
       
       Lecture rsLecture = lectureService.update(lecture);
       

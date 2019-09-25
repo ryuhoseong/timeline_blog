@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class LectureService {
 
   private final LectureRepository lectureRepository;
+  
 
   public Lecture save(LectureDto.Create lecture) {
     return lectureRepository.save(lecture.toEntity());
