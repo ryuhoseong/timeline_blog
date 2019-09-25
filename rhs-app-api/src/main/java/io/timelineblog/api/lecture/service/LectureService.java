@@ -1,6 +1,7 @@
 package io.timelineblog.api.lecture.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import io.timelineblog.api.core.domain.exception.NotFoundException;
 import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.repository.LectureRepository;
@@ -21,6 +22,7 @@ public class LectureService {
     return lectureRepository.findById(id).orElseThrow(() -> new NotFoundException("조회된 내역이 없습니다."));
   }
 
+  @Transactional
   public Lecture update(LectureDto.Update lecture) {
 
     Lecture rsLecture = lectureRepository.findById(lecture.getId())
