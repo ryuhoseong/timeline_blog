@@ -3,10 +3,9 @@ package io.timelineblog.api.lecture.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,17 +15,20 @@ import io.timelineblog.api.lecture.service.dto.LectureDto;
 
 @ActiveProfiles("Local")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LectureService.class)
 public class LectureServiceTest {
 
   @MockBean
   private LectureRepository lectureRepository;
 
-  @Autowired
   private LectureService lectureService;
+  
+  @Before
+  public void intit() {
+    this.lectureService = new LectureService(lectureRepository);
+  }
 
   @Test
-  public void save() {
+  public void 강의_저장() {
 
     LectureDto.Create lecture = new LectureDto.Create();
 
