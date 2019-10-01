@@ -10,11 +10,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "LECTURE")
 public class Lecture {
 
@@ -53,12 +55,9 @@ public class Lecture {
 
   public Lecture update(long id, String title, String subTitle, String contentc) {
    
-    this.id         = id;
-    
+    this.id         = id;    
     this.title      = title;
-
     this.subTitle   = subTitle;
-
     this.content    = contentc;
 
     return this;
