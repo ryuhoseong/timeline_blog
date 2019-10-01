@@ -22,7 +22,7 @@ public class LectureRepositoryTest {
   LectureRepository lectureRepository;
 
   @Test
-  public void save() {
+  public void 강의_저장() {
     LectureDto.Create lecture = new LectureDto.Create();
 
     lecture.setTitle("스프링 프레임워크 핵심 기술");
@@ -39,7 +39,7 @@ public class LectureRepositoryTest {
   }
   
   @Test
-  public void findById() {
+  public void 아이디_강의_조회() {
     
     LectureDto.Create lecture = new LectureDto.Create();
 

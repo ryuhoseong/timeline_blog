@@ -32,7 +32,7 @@ public class LectureRestControllerTest {
   private LectureService lectureService;
   
   @Test
-  public void save() throws Exception {
+  public void 강의_저장() throws Exception {
     
     LectureDto.Create lecture = new LectureDto.Create();
 
