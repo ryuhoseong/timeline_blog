@@ -21,7 +21,6 @@ import io.timelineblog.api.lecture.service.LectureService;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
 
 @ActiveProfiles("local")
-@RunWith(SpringRunner.class)
 @WebMvcTest(LectureRestController.class)
 public class LectureRestControllerTest {
   

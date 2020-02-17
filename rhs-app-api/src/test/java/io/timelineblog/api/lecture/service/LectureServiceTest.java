@@ -14,7 +14,6 @@ import io.timelineblog.api.lecture.repository.LectureRepository;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
 
 @ActiveProfiles("Local")
-@RunWith(SpringRunner.class)
 public class LectureServiceTest {
 
   @MockBean
