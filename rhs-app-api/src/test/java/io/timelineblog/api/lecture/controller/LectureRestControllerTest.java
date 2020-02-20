@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.timelineblog.api.lecture.service.LectureService;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
 
-@ActiveProfiles("local")
 @WebMvcTest(LectureRestController.class)
 public class LectureRestControllerTest {
   

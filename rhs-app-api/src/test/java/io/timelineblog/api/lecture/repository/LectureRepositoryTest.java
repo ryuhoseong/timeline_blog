@@ -1,19 +1,24 @@
 package io.timelineblog.api.lecture.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import io.timelineblog.api.core.domain.exception.NotFoundException;
 import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-@ActiveProfiles("local")
 @DataJpaTest
 public class LectureRepositoryTest {
 
   @Autowired
-  LectureRepository lectureRepository;
+  private LectureRepository lectureRepository;
+
+  @Autowired
+  private TestEntityManager testEntityManager;
+
 
   @Test
   public void 강의_저장() {
@@ -42,7 +47,7 @@ public class LectureRepositoryTest {
     lecture.setContent("applicationContext");
     lecture.setCreId("QA");
 
-    lectureRepository.save(lecture.toEntity());
+    testEntityManager.persist(lecture.toEntity());
     
     Lecture rsLecture = lectureRepository.findById(1L).orElseThrow(() -> new NotFoundException("조회된 내역이 없습니다."));
     
