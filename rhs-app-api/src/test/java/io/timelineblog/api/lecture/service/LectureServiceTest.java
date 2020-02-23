@@ -3,15 +3,17 @@ package io.timelineblog.api.lecture.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.repository.LectureRepository;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+@SpringBootTest(classes = {LectureRepository.class})
 public class LectureServiceTest {
 
   @MockBean
@@ -34,7 +36,7 @@ public class LectureServiceTest {
     lecture.setContent("applicationContext");
     lecture.setCreId("QA");
 
-    given(lectureRepository.save(any(Lecture.class))).willReturn(lecture.toEntity());
+    when(lectureRepository.save(any(Lecture.class))).thenReturn(lecture.toEntity());
 
     Lecture rsLecture = lectureService.save(lecture);
 
