@@ -1,7 +1,9 @@
 package io.toy.timeline.domain;
 
-import java.time.LocalDate;
+import io.toy.timeline.domain.enumeration.Topic;
+import io.toy.timeline.domain.enumeration.TopicConverter;
 import java.time.LocalDateTime;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,8 @@ public class Timeline {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String topic;
+  @Convert(converter = TopicConverter.class)
+  private Topic topic;
 
   private String title;
 
