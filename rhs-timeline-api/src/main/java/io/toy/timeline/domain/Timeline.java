@@ -1,5 +1,6 @@
 package io.toy.timeline.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +28,17 @@ public class Timeline {
 
   private String content;
 
-  private String topicStartDt;
+  private String topicStartYyyy;
 
-  private String topicEndDt;
+  private String topicStartMm;
+
+  private String topicStartDd;
+
+  private String topicEndYyyy;
+
+  private String topicEndMm;
+
+  private String topicEndDd;
 
   private String creId;
 
