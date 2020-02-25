@@ -1,9 +1,12 @@
 package io.toy.timeline.domain;
 
+import io.toy.timeline.domain.embeded.TopicEndDt;
+import io.toy.timeline.domain.embeded.TopicStartDt;
 import io.toy.timeline.domain.enumeration.Topic;
 import io.toy.timeline.domain.enumeration.TopicConverter;
 import java.time.LocalDateTime;
 import javax.persistence.Convert;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,17 +33,11 @@ public class Timeline {
 
   private String content;
 
-  private String topicStartYyyy;
+  @Embedded
+  private TopicStartDt topicStartDt;
 
-  private String topicStartMm;
-
-  private String topicStartDd;
-
-  private String topicEndYyyy;
-
-  private String topicEndMm;
-
-  private String topicEndDd;
+  @Embedded
+  private TopicEndDt topicEndDt;
 
   private String creId;
 

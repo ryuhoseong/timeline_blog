@@ -1,4 +1,4 @@
-package io.toy.timeline.domain;
+package io.toy.timelinekeyword.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
