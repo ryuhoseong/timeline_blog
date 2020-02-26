@@ -1,4 +1,4 @@
-package io.toy.timelinekeyword.domain;
+package io.toy.keyword.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Entity
-public class TimelineKeyword {
+public class Keyword {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
