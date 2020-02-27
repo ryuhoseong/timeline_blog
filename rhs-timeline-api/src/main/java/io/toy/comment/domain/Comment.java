@@ -1,10 +1,13 @@
 package io.toy.comment.domain;
 
+import io.toy.timeline.domain.Timeline;
+import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -22,6 +25,9 @@ public class Comment {
   private long parentId;
 
   private String message;
+
+  @ManyToOne
+  private Timeline timeline;
 
   private String creId;
 
