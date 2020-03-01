@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -41,4 +42,15 @@ public class Topic {
   @UpdateTimestamp
   private LocalDateTime updDtt;
 
+  @Builder
+  public Topic(String name, Topic parent, List<Topic> topicList, String creId,
+      LocalDateTime creDtt, String updId, LocalDateTime updDtt) {
+    this.name = name;
+    this.parent = parent;
+    this.topicList = topicList;
+    this.creId = creId;
+    this.creDtt = creDtt;
+    this.updId = updId;
+    this.updDtt = updDtt;
+  }
 }
