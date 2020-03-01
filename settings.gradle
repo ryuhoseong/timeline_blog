@@ -10,3 +10,4 @@
 rootProject.name = 'timeline_blog'
 
 include 'rhs-app-api'
+include 'rhs-timeline-api'

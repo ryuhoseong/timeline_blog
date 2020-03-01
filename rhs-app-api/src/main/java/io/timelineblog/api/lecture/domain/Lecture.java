@@ -6,12 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -44,11 +44,8 @@ public class Lecture {
   public Lecture(String title, String subTitle, String content, String creId) {
 
     this.title      = title;
-
     this.subTitle   = subTitle;
-
     this.content    = content;
-    
     this.creId      = creId;
 
   }
