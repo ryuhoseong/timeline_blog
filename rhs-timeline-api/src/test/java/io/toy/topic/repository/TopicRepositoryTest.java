@@ -3,6 +3,7 @@ package io.toy.topic.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.toy.topic.domain.Topic;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -40,6 +41,22 @@ class TopicRepositoryTest {
     assertEquals(topic.getName(), rsTopic.getName());
     assertEquals(topic.getParent().getName(), rsTopic.getParent().getName());
 
+  }
+
+  @Test
+  void 최상위_TOPIC_조회() throws NotFoundException {
+
+    Topic topic = Topic.builder()
+        .name("책")
+        .build()
+        ;
+
+    testEntityManager.persist(topic);
+
+    Topic rsTopic = topicRepository.findById(1L)
+        .orElseThrow(() -> new NotFoundException("조회된 내역이 없습니다."));
+
+    assertEquals(topic.getName(), rsTopic.getName());
 
   }
 
