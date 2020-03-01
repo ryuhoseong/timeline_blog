@@ -15,4 +15,15 @@ public class TopicEndDt {
 
   private String topicEndDd;
 
+  //기본생성자가 생성되지 않도록 생성방지
+/*  protected TopicEndDt(){
+    throw new AssertionError();
+  }*/
+
+  public TopicEndDt(String topicEndYyyy, String topicEndMm, String topicEndDd) {
+    this.topicEndYyyy = topicEndYyyy;
+    this.topicEndMm = topicEndMm;
+    this.topicEndDd = topicEndDd;
+  }
+
 }
