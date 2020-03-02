@@ -1,6 +1,5 @@
 package io.toy.topic.domain;
 
-import com.sun.javafx.beans.IDProperty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
+@NoArgsConstructor
 @Entity
 public class Topic {
 
