@@ -90,4 +90,56 @@ class TopicRepositoryTest {
 
   }
 
+  @Test
+  void 중간_TOPIC_조회() throws NotFoundException {
+
+    Topic parent = Topic.builder()
+        .name("책")
+        .build()
+        ;
+
+    testEntityManager.persist(parent);
+
+    Topic rsParent = testEntityManager.find(Topic.class, 1L);
+
+    Topic topic = Topic.builder()
+        .name("추리소설")
+        .parent(rsParent)
+        .build()
+        ;
+
+    testEntityManager.persist(topic);
+
+    Topic rsParent2 = testEntityManager.find(Topic.class, 2L);
+
+    Topic child = Topic.builder()
+        .name("Y의 비극")
+        .parent(rsParent2)
+        .build()
+        ;
+
+    rsParent2.addChildTopic(child);
+
+    testEntityManager.persist(child);
+
+    Topic child2 = Topic.builder()
+        .name("환상의 여의")
+        .parent(rsParent2)
+        .build()
+        ;
+
+    rsParent2.addChildTopic(child2);
+
+    testEntityManager.persist(child2);
+
+    Topic rsTopic = topicRepository.findById(2L)
+        .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));
+
+
+    assertEquals(topic.getName(), rsTopic.getName());
+    assertEquals(topic.getParent().getName(), rsTopic.getParent().getName());
+    assertEquals(2, rsTopic.getChild().size());
+
+
+  }
 }

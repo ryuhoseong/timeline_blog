@@ -2,6 +2,7 @@ package io.toy.topic.domain;
 
 import com.sun.javafx.beans.IDProperty;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -30,7 +32,7 @@ public class Topic {
   private Topic parent;
 
   @OneToMany(mappedBy = "parent")
-  private List<Topic> topicList;
+  private List<Topic> child = new ArrayList<>();
 
   private String creId;
 
@@ -43,14 +45,19 @@ public class Topic {
   private LocalDateTime updDtt;
 
   @Builder
-  public Topic(String name, Topic parent, List<Topic> topicList, String creId,
+  public Topic(String name, Topic parent, List<Topic> child, String creId,
       LocalDateTime creDtt, String updId, LocalDateTime updDtt) {
     this.name = name;
     this.parent = parent;
-    this.topicList = topicList;
+    this.child = child;
     this.creId = creId;
     this.creDtt = creDtt;
     this.updId = updId;
     this.updDtt = updDtt;
+  }
+
+  public void addChildTopic(Topic topic) {
+    if (this.child == null) this.child = new ArrayList<>();
+    this.child.add(topic);
   }
 }
