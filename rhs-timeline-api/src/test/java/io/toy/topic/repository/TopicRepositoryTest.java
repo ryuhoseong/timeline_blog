@@ -117,9 +117,6 @@ class TopicRepositoryTest {
         .parent(rsParent2)
         .build()
         ;
-
-    rsParent2.addChildTopic(child);
-
     testEntityManager.persist(child);
 
     Topic child2 = Topic.builder()
@@ -127,10 +124,10 @@ class TopicRepositoryTest {
         .parent(rsParent2)
         .build()
         ;
-
-    rsParent2.addChildTopic(child2);
-
     testEntityManager.persist(child2);
+
+    rsParent2.addChildTopic(child);
+    rsParent2.addChildTopic(child2);
 
     Topic rsTopic = topicRepository.findById(2L)
         .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));

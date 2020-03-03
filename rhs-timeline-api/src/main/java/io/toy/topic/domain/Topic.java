@@ -32,7 +32,7 @@ public class Topic {
   private Topic parent;
 
   @OneToMany(mappedBy = "parent")
-  private List<Topic> child = new ArrayList<>();
+  private List<Topic> child;
 
   private String creId;
 
@@ -49,7 +49,7 @@ public class Topic {
       LocalDateTime creDtt, String updId, LocalDateTime updDtt) {
     this.name = name;
     this.parent = parent;
-    this.child = child;
+    this.child = child == null? new ArrayList<>():child;
     this.creId = creId;
     this.creDtt = creDtt;
     this.updId = updId;
@@ -57,7 +57,6 @@ public class Topic {
   }
 
   public void addChildTopic(Topic topic) {
-    if (this.child == null) this.child = new ArrayList<>();
     this.child.add(topic);
   }
 }
