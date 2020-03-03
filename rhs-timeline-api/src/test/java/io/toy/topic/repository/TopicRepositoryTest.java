@@ -44,6 +44,7 @@ class TopicRepositoryTest {
 
   }
 
+
   @Test
   void 최상위_TOPIC_조회() throws NotFoundException {
 
@@ -137,6 +138,34 @@ class TopicRepositoryTest {
     assertEquals(topic.getParent().getName(), rsTopic.getParent().getName());
     assertEquals(2, rsTopic.getChild().size());
 
+  }
 
+  @Test
+  void TOPIC_NAME_수정() throws NotFoundException {
+    Topic parent = Topic.builder()
+        .name("책")
+        .build()
+        ;
+
+    testEntityManager.persist(parent);
+
+    Topic rsParent = testEntityManager.find(Topic.class, 1L);
+
+    Topic topic = Topic.builder()
+        .name("추리소설")
+        .parent(rsParent)
+        .build()
+        ;
+
+    testEntityManager.persist(topic);
+
+    String updateName = "SF소설";
+
+    Topic rsTopic = topicRepository.findById(2L)
+        .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));
+    rsTopic.update(updateName);
+
+    assertEquals(updateName, rsTopic.getName());
+    assertEquals(topic.getParent().getName(), rsTopic.getParent().getName());
   }
 }

@@ -59,4 +59,11 @@ public class Topic {
   public void addChildTopic(Topic topic) {
     this.child.add(topic);
   }
+
+  public Topic update(String name) {
+
+    this.name = name;
+
+    return this;
+  }
 }
