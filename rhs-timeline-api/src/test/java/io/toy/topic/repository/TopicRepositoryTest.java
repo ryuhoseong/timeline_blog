@@ -5,12 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.toy.topic.domain.Topic;
 import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+@Slf4j
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("local")
 @DataJpaTest
 public class TopicRepositoryTest {
@@ -22,6 +27,12 @@ public class TopicRepositoryTest {
   private TestEntityManager testEntityManager;
   
   private final String NOTFOUND_MESSAGE = "조회된 내역이 없습니다.";
+
+  @AfterEach
+  void reset(){
+
+  }
+
 
   @Test
   void TOPIC_저장(){
