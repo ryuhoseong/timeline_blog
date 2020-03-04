@@ -1,6 +1,7 @@
 package io.toy.topic.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.toy.topic.domain.Topic;
 import javassist.NotFoundException;
@@ -19,6 +20,8 @@ public class TopicRepositoryTest {
 
   @Autowired
   private TestEntityManager testEntityManager;
+  
+  private final String NOTFOUND_MESSAGE = "조회된 내역이 없습니다.";
 
   @Test
   void TOPIC_저장(){
@@ -57,7 +60,7 @@ public class TopicRepositoryTest {
     testEntityManager.persist(topic);
 
     Topic rsTopic = topicRepository.findById(1L)
-        .orElseThrow(() -> new NotFoundException("조회된 내역이 없습니다."));
+        .orElseThrow(() -> new NotFoundException(NOTFOUND_MESSAGE));
 
     assertEquals(topic.getName(), rsTopic.getName());
 
@@ -84,7 +87,7 @@ public class TopicRepositoryTest {
     testEntityManager.persist(topic);
 
     Topic rsTopic = topicRepository.findById(2L)
-        .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));
+        .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
 
 
     assertEquals(topic.getName(), rsTopic.getName());
@@ -132,7 +135,7 @@ public class TopicRepositoryTest {
     rsParent2.addChildTopic(child2);
 
     Topic rsTopic = topicRepository.findById(2L)
-        .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));
+        .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
 
 
     assertEquals(topic.getName(), rsTopic.getName());
@@ -163,10 +166,66 @@ public class TopicRepositoryTest {
     String updateName = "SF소설";
 
     Topic rsTopic = topicRepository.findById(2L)
-        .orElseThrow(()->new NotFoundException("조회된 내역이 없습니다"));
+        .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
     rsTopic.update(updateName);
 
     assertEquals(updateName, rsTopic.getName());
     assertEquals(topic.getParent().getName(), rsTopic.getParent().getName());
   }
+
+  @Test
+  void TOPIC_삭제() {
+
+    Topic parent = Topic.builder()
+        .name("책")
+        .build()
+        ;
+
+    testEntityManager.persist(parent);
+    
+    topicRepository.deleteById(1L);
+
+    Throwable e = assertThrows(NotFoundException.class, () -> {
+      Topic rsTopic = topicRepository.findById(1L)
+          .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
+    });
+
+    assertEquals(NOTFOUND_MESSAGE, e.getMessage());
+
+  }
+
+  @Test
+  void TOPIC_삭제_자식_TOPIC_삭제() {
+
+    Topic parent = Topic.builder()
+        .name("책")
+        .build()
+        ;
+
+    testEntityManager.persist(parent);
+
+    Topic rsParent = testEntityManager.find(Topic.class, 1L);
+
+    Topic topic = Topic.builder()
+        .name("추리소설")
+        .parent(rsParent)
+        .build()
+        ;
+
+    testEntityManager.persist(topic);
+
+    parent.addChildTopic(topic);
+
+    topicRepository.deleteById(1L);
+
+    Throwable e = assertThrows(NotFoundException.class, () -> {
+      Topic rsTopic = topicRepository.findById(2L)
+          .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
+    });
+
+    assertEquals(NOTFOUND_MESSAGE, e.getMessage());
+
+  }
+
+
 }
