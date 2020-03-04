@@ -28,11 +28,6 @@ public class TopicRepositoryTest {
   
   private final String NOTFOUND_MESSAGE = "조회된 내역이 없습니다.";
 
-  @AfterEach
-  void reset(){
-
-  }
-
 
   @Test
   void TOPIC_저장(){
