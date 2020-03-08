@@ -3,17 +3,17 @@ package io.toy.timeline.domain;
 import io.toy.comment.domain.Comment;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
-import io.toy.timeline.domain.enumeration.Topic;
-import io.toy.timeline.domain.enumeration.TopicConverter;
+import io.toy.topic.domain.Topic;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public class Timeline {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Convert(converter = TopicConverter.class)
+  @ManyToOne(fetch = FetchType.LAZY)
   private Topic topic;
 
   private String title;
