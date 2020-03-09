@@ -1,12 +1,12 @@
 package io.timelineblog.api.lecture.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import io.timelineblog.api.core.domain.exception.NotFoundException;
 import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.repository.LectureRepository;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service

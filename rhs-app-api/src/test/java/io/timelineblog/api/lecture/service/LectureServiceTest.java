@@ -1,20 +1,19 @@
 package io.timelineblog.api.lecture.service;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.mockito.Mockito.when;
+
 import io.timelineblog.api.lecture.domain.Lecture;
 import io.timelineblog.api.lecture.repository.LectureRepository;
 import io.timelineblog.api.lecture.service.dto.LectureDto;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-@ActiveProfiles("Local")
-@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {LectureRepository.class})
 public class LectureServiceTest {
 
   @MockBean
@@ -22,8 +21,8 @@ public class LectureServiceTest {
 
   private LectureService lectureService;
   
-  @Before
-  public void intit() {
+  @BeforeEach
+  public void init() {
     this.lectureService = new LectureService(lectureRepository);
   }
 
@@ -33,11 +32,11 @@ public class LectureServiceTest {
     LectureDto.Create lecture = new LectureDto.Create();
 
     lecture.setTitle("스프링 프레임워크 핵심 기술");
-    lecture.setSubTitle("ApplicationContext와 다양한 빈 설정방법");
+    lecture.setSubTitle("ApplicationContext 와 다양한 빈 설정방법");
     lecture.setContent("applicationContext");
     lecture.setCreId("QA");
 
-    given(lectureRepository.save(any(Lecture.class))).willReturn(lecture.toEntity());
+    when(lectureRepository.save(any(Lecture.class))).thenReturn(lecture.toEntity());
 
     Lecture rsLecture = lectureService.save(lecture);
 

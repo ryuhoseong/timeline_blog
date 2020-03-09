@@ -1,7 +1,7 @@
 package io.timelineblog.api.lecture.service.dto;
 
-import javax.validation.constraints.NotEmpty;
 import io.timelineblog.api.lecture.domain.Lecture;
+import javax.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

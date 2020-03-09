@@ -1,0 +1,42 @@
+server:
+  port: 8080
+logging:
+  level:
+    org:
+      timeline_blog: DEBUG
+      hibernate:
+        type:
+          EnumType: TRACE
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com:
+      zaxxer: DEBUG
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+      multiline: true
+
+spring:
+  profiles: local
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  datasource:
+    platform: h2
+    url: jdbc:h2:mem:toy
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+  h2: # h2 web 접속여부 ~/h2
+    console:
+      enabled: true
+      path: /h2
