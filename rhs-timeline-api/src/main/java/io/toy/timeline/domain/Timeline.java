@@ -66,19 +66,17 @@ public class Timeline {
   public Timeline(Topic topic, String title, String subTitle, String content,
       TopicStartDt topicStartDt, TopicEndDt topicEndDt,
       List<Comment> comment,
-      List<TimeLineKeyword> timeLineKeywords, String creId, LocalDateTime creDtt,
-      String updId, LocalDateTime updDtt) {
+      List<TimeLineKeyword> timeLineKeywords, String creId, String updId) {
     this.topic = topic;
     this.title = title;
     this.subTitle = subTitle;
     this.content = content;
     this.topicStartDt = topicStartDt;
     this.topicEndDt = topicEndDt;
-    this.comment = comment == null ? new ArrayList<Comment>() : comment;
-    this.timeLineKeywords = timeLineKeywords == null ? new ArrayList<TimeLineKeyword>() : timeLineKeywords;
+    this.comment = comment;
+    this.timeLineKeywords = timeLineKeywords;
     this.creId = creId;
-    this.creDtt = creDtt;
     this.updId = updId;
-    this.updDtt = updDtt;
   }
+
 }

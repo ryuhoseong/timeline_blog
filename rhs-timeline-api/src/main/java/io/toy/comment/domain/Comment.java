@@ -41,15 +41,12 @@ public class Comment {
   private LocalDateTime updDtt;
 
   @Builder
-  public Comment(long parentId, String message,
-      Timeline timeline, String creId, LocalDateTime creDtt, String updId,
+  public Comment(long parentId, String message, Timeline timeline, LocalDateTime creDtt,
       LocalDateTime updDtt) {
     this.parentId = parentId;
     this.message = message;
     this.timeline = timeline;
-    this.creId = creId;
     this.creDtt = creDtt;
-    this.updId = updId;
     this.updDtt = updDtt;
   }
 }
