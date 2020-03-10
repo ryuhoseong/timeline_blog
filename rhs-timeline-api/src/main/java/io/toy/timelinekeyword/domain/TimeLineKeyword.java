@@ -1,29 +1,32 @@
-package io.toy.keyword.domain;
+package io.toy.timelinekeyword.domain;
 
-import io.toy.timelinekeyword.domain.TimeLineKeyword;
+import io.toy.keyword.domain.Keyword;
+import io.toy.timeline.domain.Timeline;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@NoArgsConstructor
 @Getter
 @Entity
-public class Keyword {
+public class TimeLineKeyword {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String keyword;
+  @ManyToOne
+  private Keyword keyword;
 
-  @OneToMany(mappedBy = "keyword")
-  private List<TimeLineKeyword> timeLineKeywordList;
+  @ManyToOne
+  private Timeline timeline;
 
   private String creId;
 
@@ -34,6 +37,5 @@ public class Keyword {
 
   @UpdateTimestamp
   private LocalDateTime updDtt;
-
 
 }

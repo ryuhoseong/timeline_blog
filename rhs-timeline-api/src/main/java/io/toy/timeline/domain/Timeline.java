@@ -3,6 +3,7 @@ package io.toy.timeline.domain;
 import io.toy.comment.domain.Comment;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
+import io.toy.timelinekeyword.domain.TimeLineKeyword;
 import io.toy.topic.domain.Topic;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,7 +47,10 @@ public class Timeline {
   private TopicEndDt topicEndDt;
 
   @OneToMany(mappedBy = "timeline")
-  private List<Comment> comment = new ArrayList<>();
+  private List<Comment> comment;
+
+  @OneToMany(mappedBy = "timeline")
+  private List<TimeLineKeyword> timeLineKeywords;
 
   private String creId;
 
@@ -61,19 +65,20 @@ public class Timeline {
   @Builder
   public Timeline(Topic topic, String title, String subTitle, String content,
       TopicStartDt topicStartDt, TopicEndDt topicEndDt,
-      List<Comment> comment, String creId, LocalDateTime creDtt, String updId,
-      LocalDateTime updDtt) {
+      List<Comment> comment,
+      List<TimeLineKeyword> timeLineKeywords, String creId, LocalDateTime creDtt,
+      String updId, LocalDateTime updDtt) {
     this.topic = topic;
     this.title = title;
     this.subTitle = subTitle;
     this.content = content;
     this.topicStartDt = topicStartDt;
     this.topicEndDt = topicEndDt;
-    this.comment = comment;
+    this.comment = comment == null ? new ArrayList<Comment>() : comment;
+    this.timeLineKeywords = timeLineKeywords == null ? new ArrayList<TimeLineKeyword>() : timeLineKeywords;
     this.creId = creId;
     this.creDtt = creDtt;
     this.updId = updId;
     this.updDtt = updDtt;
   }
-
 }
