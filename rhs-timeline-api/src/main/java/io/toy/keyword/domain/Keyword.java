@@ -4,7 +4,9 @@ import io.toy.timelinekeyword.domain.TimeLineKeyword;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public class Keyword {
 
   private String keyword;
 
-  @OneToMany(mappedBy = "keyword")
+  @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL)
   private List<TimeLineKeyword> timeLineKeywordList;
 
   private String creId;
@@ -53,5 +55,6 @@ public class Keyword {
 
   public void addTimeLineKeyword(TimeLineKeyword timeLineKeyword){
     this.timeLineKeywordList.add(timeLineKeyword);
+    timeLineKeyword.addKeyword(this);
   }
 }

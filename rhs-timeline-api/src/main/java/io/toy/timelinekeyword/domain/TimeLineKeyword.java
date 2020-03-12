@@ -2,8 +2,10 @@ package io.toy.timelinekeyword.domain;
 
 import io.toy.keyword.domain.Keyword;
 import io.toy.timeline.domain.Timeline;
+import java.security.Key;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +25,10 @@ public class TimeLineKeyword {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Keyword keyword;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Timeline timeline;
 
   private String creId;
@@ -41,9 +43,18 @@ public class TimeLineKeyword {
 
   @Builder
   public TimeLineKeyword(Keyword keyword, Timeline timeline, String creId, String updId) {
-    this.keyword = keyword;
-    this.timeline = timeline;
+    this.keyword = keyword == null ? new Keyword() : keyword;
+    this.timeline = timeline == null ? new Timeline() : timeline;
     this.creId = creId;
     this.updId = updId;
   }
+
+  public void addTimeline(Timeline timeline){
+    this.timeline = timeline;
+  }
+
+  public void addKeyword(Keyword keyword) {
+    this.keyword = keyword;
+  }
+
 }
