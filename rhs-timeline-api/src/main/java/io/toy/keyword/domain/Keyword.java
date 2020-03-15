@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class Keyword {
 
   private String keyword;
 
-  @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<TimeLineKeyword> timeLineKeywordList;
 
   private String creId;
@@ -42,18 +43,23 @@ public class Keyword {
 
   @Builder
   public Keyword(String keyword,
-      List<TimeLineKeyword> timeLineKeywordList, String creId, LocalDateTime creDtt,
-      String updId, LocalDateTime updDtt) {
+      List<TimeLineKeyword> timeLineKeywordList, String creId, String updId) {
     this.keyword = keyword;
     this.timeLineKeywordList = timeLineKeywordList == null ? new ArrayList<>() : timeLineKeywordList;
     this.creId = creId;
-    this.creDtt = creDtt;
     this.updId = updId;
-    this.updDtt = updDtt;
   }
 
   public void addTimeLineKeyword(TimeLineKeyword timeLineKeyword){
     this.timeLineKeywordList.add(timeLineKeyword);
     timeLineKeyword.addKeyword(this);
+  }
+
+  public Keyword update(String keyword) {
+
+    this.keyword = keyword;
+
+    return this;
+
   }
 }

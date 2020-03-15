@@ -184,6 +184,27 @@ class KeywordRepositoryTest {
   }
 
   @Test
+  void 수정() throws NotFoundException {
+
+    Keyword keyword = Keyword.builder()
+        .keyword("세계3대추리소설")
+        .creId("QA")
+        .build()
+        ;
+    testEntityManager.persist(keyword);
+
+    Keyword rsKeyword = keywordRepository.findById(1L)
+        .orElseThrow(() -> new NotFoundException(NOTFOUND_MESSAGE));
+
+    String updateKeyword = "3대 추리소설";
+
+    rsKeyword.update(updateKeyword);
+
+    assertEquals(updateKeyword, rsKeyword.getKeyword());
+
+  }
+
+  @Test
   void 삭제() throws NotFoundException {
 
     TopicStartDt topicStartDt = new TopicStartDt("2020", "02", "27");
