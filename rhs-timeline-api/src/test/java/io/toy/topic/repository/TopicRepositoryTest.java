@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import io.toy.topic.domain.Topic;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -27,7 +26,6 @@ public class TopicRepositoryTest {
   private TestEntityManager testEntityManager;
   
   private final String NOTFOUND_MESSAGE = "조회된 내역이 없습니다.";
-
 
   @Test
   void TOPIC_저장(){

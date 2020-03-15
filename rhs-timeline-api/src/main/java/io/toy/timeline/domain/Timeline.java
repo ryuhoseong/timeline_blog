@@ -6,7 +6,6 @@ import io.toy.timeline.domain.embeded.TopicStartDt;
 import io.toy.timelinekeyword.domain.TimeLineKeyword;
 import io.toy.topic.domain.Topic;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

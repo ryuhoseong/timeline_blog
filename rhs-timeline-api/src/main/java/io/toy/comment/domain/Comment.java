@@ -1,7 +1,6 @@
 package io.toy.comment.domain;
 
 import io.toy.timeline.domain.Timeline;
-import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

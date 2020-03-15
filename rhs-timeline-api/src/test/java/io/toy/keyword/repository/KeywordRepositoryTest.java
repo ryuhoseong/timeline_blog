@@ -1,6 +1,7 @@
 package io.toy.keyword.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.toy.keyword.domain.Keyword;
 import io.toy.timeline.domain.Timeline;
@@ -10,7 +11,6 @@ import io.toy.timelinekeyword.domain.TimeLineKeyword;
 import io.toy.topic.domain.Topic;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,12 @@ import org.springframework.test.context.ActiveProfiles;
 class KeywordRepositoryTest {
 
   @Autowired
-  private KeywordRepository keywordRepository;
+  private TestEntityManager testEntityManager;
 
   @Autowired
-  private TestEntityManager testEntityManager;
+  private KeywordRepository keywordRepository;
+
+  private final String NOTFOUND_MESSAGE = "조회된 내역이 없습니다.";
 
 
   @Test
@@ -169,7 +171,7 @@ class KeywordRepositoryTest {
 
     testEntityManager.persist(keyword);
 
-    Keyword findKeyword = keywordRepository.findById(1L).orElseThrow(() -> new NotFoundException("조회된 내역이 없습니다"));
+    Keyword findKeyword = keywordRepository.findById(1L).orElseThrow(() -> new NotFoundException(NOTFOUND_MESSAGE));
 
     assertEquals(keyword.getKeyword(), findKeyword.getKeyword());
     assertEquals(keyword.getTimeLineKeywordList().get(0).getTimeline().getTitle(),
@@ -178,6 +180,107 @@ class KeywordRepositoryTest {
         findKeyword.getTimeLineKeywordList().get(1).getTimeline().getTitle());
     assertEquals(keyword.getTimeLineKeywordList().get(2).getTimeline().getTitle(),
         findKeyword.getTimeLineKeywordList().get(2).getTimeline().getTitle());
+
+  }
+
+  @Test
+  void 삭제() throws NotFoundException {
+
+    TopicStartDt topicStartDt = new TopicStartDt("2020", "02", "27");
+    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
+
+    Topic topic = Topic.builder()
+        .name("추리소설")
+        .build()
+        ;
+
+    testEntityManager.persist(topic);
+
+    Timeline timeline1 = Timeline.builder()
+        .topic(topic)
+        .title("Y의 비극")
+        .subTitle("부제1")
+        .content("내용1")
+        .topicStartDt(topicStartDt)
+        .topicEndDt(topicEndDt)
+        .build()
+        ;
+
+    Timeline timeline2 = Timeline.builder()
+        .topic(topic)
+        .title("그리고 아무도 없었다")
+        .subTitle("부제2")
+        .content("내용2")
+        .topicStartDt(topicStartDt)
+        .topicEndDt(topicEndDt)
+        .build()
+        ;
+
+    Timeline timeline3 = Timeline.builder()
+        .topic(topic)
+        .title("환상의 여인")
+        .subTitle("부제3")
+        .content("내용3")
+        .topicStartDt(topicStartDt)
+        .topicEndDt(topicEndDt)
+        .build()
+        ;
+
+    testEntityManager.persist(timeline1);
+    testEntityManager.persist(timeline2);
+    testEntityManager.persist(timeline3);
+
+    Timeline rsTimeline1 = testEntityManager.find(Timeline.class, 1L);
+    Timeline rsTimeline2 = testEntityManager.find(Timeline.class, 2L);
+    Timeline rsTimeline3 = testEntityManager.find(Timeline.class, 3L);
+
+    TimeLineKeyword timeLineKeyword1 = TimeLineKeyword.builder()
+        .timeline(rsTimeline1)
+        .creId("QA")
+        .build()
+        ;
+
+    TimeLineKeyword timeLineKeyword2 = TimeLineKeyword.builder()
+        .timeline(rsTimeline2)
+        .creId("QA")
+        .build()
+        ;
+
+    TimeLineKeyword timeLineKeyword3 = TimeLineKeyword.builder()
+        .timeline(rsTimeline3)
+        .creId("QA")
+        .build()
+        ;
+
+    Keyword keyword = Keyword.builder()
+        .keyword("세계3대추리소설")
+        .creId("QA")
+        .build()
+        ;
+
+    List<TimeLineKeyword> timeLineKeywordList = new ArrayList<>();
+    timeLineKeywordList.add(timeLineKeyword1);
+    timeLineKeywordList.add(timeLineKeyword2);
+    timeLineKeywordList.add(timeLineKeyword3);
+
+    for (TimeLineKeyword timeLineKeyword: timeLineKeywordList) {
+
+      keyword.addTimeLineKeyword(timeLineKeyword);
+
+    }
+
+    testEntityManager.persist(keyword);
+
+    Keyword findKeyword = keywordRepository.findById(1L).orElseThrow(() -> new NotFoundException(NOTFOUND_MESSAGE));
+
+    keywordRepository.delete(findKeyword);
+
+    Throwable e = assertThrows(NotFoundException.class, () -> {
+      Keyword delKeyword = keywordRepository.findById(1L)
+          .orElseThrow(()->new NotFoundException(NOTFOUND_MESSAGE));
+    });
+
+    assertEquals(NOTFOUND_MESSAGE, e.getMessage());
 
   }
 

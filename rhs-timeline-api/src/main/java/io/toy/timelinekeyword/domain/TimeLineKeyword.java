@@ -2,7 +2,6 @@ package io.toy.timelinekeyword.domain;
 
 import io.toy.keyword.domain.Keyword;
 import io.toy.timeline.domain.Timeline;
-import java.security.Key;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
