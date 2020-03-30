@@ -1,7 +1,6 @@
 package io.toy.comment.domain;
 
 import io.toy.timeline.domain.Timeline;
-import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,15 +40,12 @@ public class Comment {
   private LocalDateTime updDtt;
 
   @Builder
-  public Comment(long parentId, String message,
-      Timeline timeline, String creId, LocalDateTime creDtt, String updId,
+  public Comment(long parentId, String message, Timeline timeline, LocalDateTime creDtt,
       LocalDateTime updDtt) {
     this.parentId = parentId;
     this.message = message;
     this.timeline = timeline;
-    this.creId = creId;
     this.creDtt = creDtt;
-    this.updId = updId;
     this.updDtt = updDtt;
   }
 }

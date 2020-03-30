@@ -1,7 +1,6 @@
 package io.toy.topic.domain;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -47,15 +46,12 @@ public class Topic {
   private LocalDateTime updDtt;
 
   @Builder
-  public Topic(String name, Topic parent, List<Topic> child, String creId,
-      LocalDateTime creDtt, String updId, LocalDateTime updDtt) {
+  public Topic(String name, Topic parent, List<Topic> child, String creId, String updId) {
     this.name = name;
     this.parent = parent;
-    this.child = child == null? new ArrayList<>():child;
+    this.child = child;
     this.creId = creId;
-    this.creDtt = creDtt;
     this.updId = updId;
-    this.updDtt = updDtt;
   }
 
   public void addChildTopic(Topic topic) {
