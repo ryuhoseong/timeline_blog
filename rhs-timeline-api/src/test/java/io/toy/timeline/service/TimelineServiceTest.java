@@ -1,20 +1,31 @@
 package io.toy.timeline.service;
 
-import io.toy.comment.domain.Comment;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import io.toy.timeline.domain.Timeline;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
 import io.toy.timeline.repository.TimelineRepository;
 import io.toy.topic.domain.Topic;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+@SpringBootTest(classes = {TimelineRepository.class})
 class TimelineServiceTest {
 
   @MockBean
   private TimelineRepository timelineRepository;
 
-  private TimelineService timelineService = new TimelineService(timelineRepository);
+  private TimelineService timelineService;
+
+  @BeforeEach
+  public void init() {
+    this.timelineService = new TimelineService(timelineRepository);
+  }
 
   @Test
   void 저장() {
@@ -37,11 +48,13 @@ class TimelineServiceTest {
         .build()
         ;
 
-    Comment comment = Comment.builder()
-        .message("comment message")
-        .timeline(timeline)
-        .build()
-        ;
+    when(timelineRepository.save(any(Timeline.class))).thenReturn(timeline);
+
+    Timeline rsTimeLine = timelineService.save(timeline);
+
+    assertEquals(timeline.getTitle(), rsTimeLine.getTitle());
+    assertEquals(timeline.getTopicStartDt(), rsTimeLine.getTopicStartDt());
+    assertEquals(timeline.getTopicEndDt(), rsTimeLine.getTopicEndDt());
 
   }
 
