@@ -13,6 +13,7 @@ import io.toy.timeline.service.dto.TimelineDto.Create;
 import io.toy.topic.domain.Topic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -51,12 +52,8 @@ class TimelineServiceTest {
         ;
 
     TimelineDto.Create create = new Create();
-    create.setTopic(timeline.getTopic());
-    create.setTitle(timeline.getTitle());
-    create.setSubTitle(timeline.getSubTitle());
-    create.setContent(timeline.getTitle());
-    create.setTopicStartDt(timeline.getTopicStartDt());
-    create.setTopicEndDt(timeline.getTopicEndDt());
+
+    BeanUtils.copyProperties(timeline, create);
 
     when(timelineRepository.save(any(Timeline.class))).thenReturn(timeline);
 
