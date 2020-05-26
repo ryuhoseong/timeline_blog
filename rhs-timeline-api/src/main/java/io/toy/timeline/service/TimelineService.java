@@ -4,7 +4,6 @@ import io.toy.timeline.domain.Timeline;
 import io.toy.timeline.repository.TimelineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @RequiredArgsConstructor
 @Service
