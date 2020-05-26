@@ -1,6 +1,6 @@
 package io.toy.keyword.domain;
 
-import io.toy.timelinekeyword.domain.TimeLineKeyword;
+import io.toy.timelinekeyword.domain.TimelineKeyword;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Keyword {
   private String keyword;
 
   @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<TimeLineKeyword> timeLineKeywordList;
+  private List<TimelineKeyword> timelineKeywordList;
 
   private String creId;
 
@@ -43,16 +43,17 @@ public class Keyword {
 
   @Builder
   public Keyword(String keyword,
-      List<TimeLineKeyword> timeLineKeywordList, String creId, String updId) {
+      List<TimelineKeyword> timelineKeywordList, String creId, String updId) {
     this.keyword = keyword;
-    this.timeLineKeywordList = timeLineKeywordList == null ? new ArrayList<>() : timeLineKeywordList;
+    this.timelineKeywordList = timelineKeywordList
+        == null ? new ArrayList<>() : timelineKeywordList;
     this.creId = creId;
     this.updId = updId;
   }
 
-  public void addTimeLineKeyword(TimeLineKeyword timeLineKeyword){
-    this.timeLineKeywordList.add(timeLineKeyword);
-    timeLineKeyword.addKeyword(this);
+  public void addTimeLineKeyword(TimelineKeyword timelineKeyword){
+    this.timelineKeywordList.add(timelineKeyword);
+    timelineKeyword.addKeyword(this);
   }
 
   public Keyword update(String keyword) {

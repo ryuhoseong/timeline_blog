@@ -3,7 +3,7 @@ package io.toy.timeline.domain;
 import io.toy.comment.domain.Comment;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
-import io.toy.timelinekeyword.domain.TimeLineKeyword;
+import io.toy.timelinekeyword.domain.TimelineKeyword;
 import io.toy.topic.domain.Topic;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,7 +49,7 @@ public class Timeline {
   private List<Comment> comment;
 
   @OneToMany(mappedBy = "timeline")
-  private List<TimeLineKeyword> timeLineKeywords;
+  private List<TimelineKeyword> timelineKeywords;
 
   private String creId;
 
@@ -65,7 +65,7 @@ public class Timeline {
   public Timeline(Topic topic, String title, String subTitle, String content,
       TopicStartDt topicStartDt, TopicEndDt topicEndDt,
       List<Comment> comment,
-      List<TimeLineKeyword> timeLineKeywords, String creId, String updId) {
+      List<TimelineKeyword> timelineKeywords, String creId, String updId) {
     this.topic = topic;
     this.title = title;
     this.subTitle = subTitle;
@@ -73,7 +73,7 @@ public class Timeline {
     this.topicStartDt = topicStartDt;
     this.topicEndDt = topicEndDt;
     this.comment = comment;
-    this.timeLineKeywords = timeLineKeywords;
+    this.timelineKeywords = timelineKeywords;
     this.creId = creId;
     this.updId = updId;
   }

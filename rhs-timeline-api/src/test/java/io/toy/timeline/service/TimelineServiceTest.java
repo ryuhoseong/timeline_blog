@@ -8,6 +8,8 @@ import io.toy.timeline.domain.Timeline;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
 import io.toy.timeline.repository.TimelineRepository;
+import io.toy.timeline.service.dto.TimelineDto;
+import io.toy.timeline.service.dto.TimelineDto.Create;
 import io.toy.topic.domain.Topic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,9 +50,17 @@ class TimelineServiceTest {
         .build()
         ;
 
+    TimelineDto.Create create = new Create();
+    create.setTopic(timeline.getTopic());
+    create.setTitle(timeline.getTitle());
+    create.setSubTitle(timeline.getSubTitle());
+    create.setContent(timeline.getTitle());
+    create.setTopicStartDt(timeline.getTopicStartDt());
+    create.setTopicEndDt(timeline.getTopicEndDt());
+
     when(timelineRepository.save(any(Timeline.class))).thenReturn(timeline);
 
-    Timeline rsTimeLine = timelineService.save(timeline);
+    Timeline rsTimeLine = timelineService.save(create);
 
     assertEquals(timeline.getTitle(), rsTimeLine.getTitle());
     assertEquals(timeline.getTopicStartDt(), rsTimeLine.getTopicStartDt());

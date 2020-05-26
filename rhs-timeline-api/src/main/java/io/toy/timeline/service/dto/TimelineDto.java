@@ -1,17 +1,16 @@
 package io.toy.timeline.service.dto;
 
-import io.toy.comment.domain.Comment;
 import io.toy.timeline.domain.Timeline;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
-import io.toy.timelinekeyword.domain.TimeLineKeyword;
+import io.toy.timelinekeyword.domain.TimelineKeyword;
 import io.toy.topic.domain.Topic;
 import java.util.List;
 import javax.persistence.Embedded;
 import lombok.Getter;
 import lombok.Setter;
 
-public class TimeLineDto {
+public class TimelineDto {
 
   @Getter
   @Setter
@@ -31,7 +30,7 @@ public class TimeLineDto {
     @Embedded
     private TopicEndDt topicEndDt;
 
-    private List<TimeLineKeyword> timeLineKeywords;
+    private List<TimelineKeyword> timelineKeywords;
 
     private String creId;
 
@@ -43,7 +42,7 @@ public class TimeLineDto {
           .content(this.content)
           .topicStartDt(this.topicStartDt)
           .topicEndDt(this.topicEndDt)
-          .timeLineKeywords(this.timeLineKeywords)
+          .timelineKeywords(this.timelineKeywords)
           .creId(this.creId)
           .build();
     }

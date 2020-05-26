@@ -7,7 +7,7 @@ import io.toy.keyword.domain.Keyword;
 import io.toy.timeline.domain.Timeline;
 import io.toy.timeline.domain.embeded.TopicEndDt;
 import io.toy.timeline.domain.embeded.TopicStartDt;
-import io.toy.timelinekeyword.domain.TimeLineKeyword;
+import io.toy.timelinekeyword.domain.TimelineKeyword;
 import io.toy.topic.domain.Topic;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ class KeywordRepositoryTest {
 
     Timeline rsTimeline = testEntityManager.find(Timeline.class, 1L);
 
-    TimeLineKeyword timeLineKeyword = TimeLineKeyword.builder()
+    TimelineKeyword timeLineKeyword = TimelineKeyword.builder()
         .timeline(rsTimeline)
         .creId("QA")
         .build()
@@ -77,9 +77,9 @@ class KeywordRepositoryTest {
     Keyword rsKeyword = keywordRepository.save(keyword);
 
     assertEquals(keyword.getKeyword(), rsKeyword.getKeyword());
-    assertEquals(keyword.getTimeLineKeywordList().get(0).getTimeline().getTitle(),
-        rsKeyword.getTimeLineKeywordList().get(0).getTimeline().getTitle());
-    assertEquals(keyword.getKeyword(), rsKeyword.getTimeLineKeywordList().get(0).getKeyword().getKeyword());
+    assertEquals(keyword.getTimelineKeywordList().get(0).getTimeline().getTitle(),
+        rsKeyword.getTimelineKeywordList().get(0).getTimeline().getTitle());
+    assertEquals(keyword.getKeyword(), rsKeyword.getTimelineKeywordList().get(0).getKeyword().getKeyword());
 
   }
 
@@ -134,19 +134,19 @@ class KeywordRepositoryTest {
     Timeline rsTimeline2 = testEntityManager.find(Timeline.class, 2L);
     Timeline rsTimeline3 = testEntityManager.find(Timeline.class, 3L);
 
-    TimeLineKeyword timeLineKeyword1 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword1 = TimelineKeyword.builder()
         .timeline(rsTimeline1)
         .creId("QA")
         .build()
         ;
 
-    TimeLineKeyword timeLineKeyword2 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword2 = TimelineKeyword.builder()
         .timeline(rsTimeline2)
         .creId("QA")
         .build()
         ;
 
-    TimeLineKeyword timeLineKeyword3 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword3 = TimelineKeyword.builder()
         .timeline(rsTimeline3)
         .creId("QA")
         .build()
@@ -158,12 +158,12 @@ class KeywordRepositoryTest {
         .build()
         ;
 
-    List<TimeLineKeyword> timeLineKeywordList = new ArrayList<>();
-    timeLineKeywordList.add(timeLineKeyword1);
-    timeLineKeywordList.add(timeLineKeyword2);
-    timeLineKeywordList.add(timeLineKeyword3);
+    List<TimelineKeyword> timelineKeywordList = new ArrayList<>();
+    timelineKeywordList.add(timelineKeyword1);
+    timelineKeywordList.add(timelineKeyword2);
+    timelineKeywordList.add(timelineKeyword3);
 
-    for (TimeLineKeyword timeLineKeyword: timeLineKeywordList) {
+    for (TimelineKeyword timeLineKeyword: timelineKeywordList) {
 
       keyword.addTimeLineKeyword(timeLineKeyword);
 
@@ -174,12 +174,12 @@ class KeywordRepositoryTest {
     Keyword findKeyword = keywordRepository.findById(1L).orElseThrow(() -> new NotFoundException(NOTFOUND_MESSAGE));
 
     assertEquals(keyword.getKeyword(), findKeyword.getKeyword());
-    assertEquals(keyword.getTimeLineKeywordList().get(0).getTimeline().getTitle(),
-        findKeyword.getTimeLineKeywordList().get(0).getTimeline().getTitle());
-    assertEquals(keyword.getTimeLineKeywordList().get(1).getTimeline().getTitle(),
-        findKeyword.getTimeLineKeywordList().get(1).getTimeline().getTitle());
-    assertEquals(keyword.getTimeLineKeywordList().get(2).getTimeline().getTitle(),
-        findKeyword.getTimeLineKeywordList().get(2).getTimeline().getTitle());
+    assertEquals(keyword.getTimelineKeywordList().get(0).getTimeline().getTitle(),
+        findKeyword.getTimelineKeywordList().get(0).getTimeline().getTitle());
+    assertEquals(keyword.getTimelineKeywordList().get(1).getTimeline().getTitle(),
+        findKeyword.getTimelineKeywordList().get(1).getTimeline().getTitle());
+    assertEquals(keyword.getTimelineKeywordList().get(2).getTimeline().getTitle(),
+        findKeyword.getTimelineKeywordList().get(2).getTimeline().getTitle());
 
   }
 
@@ -255,19 +255,19 @@ class KeywordRepositoryTest {
     Timeline rsTimeline2 = testEntityManager.find(Timeline.class, 2L);
     Timeline rsTimeline3 = testEntityManager.find(Timeline.class, 3L);
 
-    TimeLineKeyword timeLineKeyword1 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword1 = TimelineKeyword.builder()
         .timeline(rsTimeline1)
         .creId("QA")
         .build()
         ;
 
-    TimeLineKeyword timeLineKeyword2 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword2 = TimelineKeyword.builder()
         .timeline(rsTimeline2)
         .creId("QA")
         .build()
         ;
 
-    TimeLineKeyword timeLineKeyword3 = TimeLineKeyword.builder()
+    TimelineKeyword timelineKeyword3 = TimelineKeyword.builder()
         .timeline(rsTimeline3)
         .creId("QA")
         .build()
@@ -279,12 +279,12 @@ class KeywordRepositoryTest {
         .build()
         ;
 
-    List<TimeLineKeyword> timeLineKeywordList = new ArrayList<>();
-    timeLineKeywordList.add(timeLineKeyword1);
-    timeLineKeywordList.add(timeLineKeyword2);
-    timeLineKeywordList.add(timeLineKeyword3);
+    List<TimelineKeyword> timelineKeywordList = new ArrayList<>();
+    timelineKeywordList.add(timelineKeyword1);
+    timelineKeywordList.add(timelineKeyword2);
+    timelineKeywordList.add(timelineKeyword3);
 
-    for (TimeLineKeyword timeLineKeyword: timeLineKeywordList) {
+    for (TimelineKeyword timeLineKeyword: timelineKeywordList) {
 
       keyword.addTimeLineKeyword(timeLineKeyword);
 
