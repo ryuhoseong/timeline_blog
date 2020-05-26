@@ -2,13 +2,15 @@ package io.toy.timeline.domain.embeded;
 
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Embeddable
 public class TopicStartDt {
 
-  private String topicStartDt;
+  private String topicStartYyyymmdd;
 
   private String topicStartYyyy;
 
@@ -17,27 +19,12 @@ public class TopicStartDt {
   private String topicStartDd;
 
 
-  public TopicStartDt(String topicStartDt) {
-    this.topicStartDt = topicStartDt;
-    this.topicStartYyyy = topicStartDt.substring(0, 4);
-    this.topicStartMm = topicStartDt.substring(4, 6);
-    this.topicStartDd = topicStartDt.substring(6);
+  public TopicStartDt(String topicStartYyyymmdd) {
+    this.topicStartYyyymmdd = topicStartYyyymmdd;
+    this.topicStartYyyy = topicStartYyyymmdd.substring(0, 4);
+    this.topicStartMm = topicStartYyyymmdd.substring(4, 6);
+    this.topicStartDd = topicStartYyyymmdd.substring(6);
   }
 
-  public String getTopicStartDt() {
-    return topicStartDt;
-  }
-
-  public String getTopicStartYyyy() {
-    return topicStartYyyy;
-  }
-
-  public String getTopicStartMm() {
-    return topicStartMm;
-  }
-
-  public String getTopicStartDd() {
-    return topicStartDd;
-  }
 
 }
