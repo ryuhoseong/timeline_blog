@@ -33,7 +33,7 @@ class TimelineServiceTest {
   @Test
   void 저장() {
 
-    TopicStartDt topicStartDt = new TopicStartDt("2020", "02", "27");
+    TopicStartDt topicStartDt = new TopicStartDt("20200227");
     TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
 
     Topic topic = Topic.builder()
