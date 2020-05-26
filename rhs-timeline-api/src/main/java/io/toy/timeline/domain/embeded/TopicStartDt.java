@@ -26,5 +26,4 @@ public class TopicStartDt {
     this.topicStartDd = topicStartYyyymmdd.substring(6);
   }
 
-
 }

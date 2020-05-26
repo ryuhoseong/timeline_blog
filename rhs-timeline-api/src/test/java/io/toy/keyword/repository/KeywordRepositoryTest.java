@@ -37,7 +37,7 @@ class KeywordRepositoryTest {
   void 저장_With_Timeline(){
 
     TopicStartDt topicStartDt = new TopicStartDt("20200227");
-    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
+    TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
     Topic topic = Topic.builder()
         .name("추리소설")
@@ -87,7 +87,7 @@ class KeywordRepositoryTest {
   void 조회_연관된_timeline_반환() throws NotFoundException {
 
     TopicStartDt topicStartDt = new TopicStartDt("20200227");
-    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
+    TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
     Topic topic = Topic.builder()
         .name("추리소설")
@@ -208,7 +208,7 @@ class KeywordRepositoryTest {
   void 삭제() throws NotFoundException {
 
     TopicStartDt topicStartDt = new TopicStartDt("20200227");
-    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
+    TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
     Topic topic = Topic.builder()
         .name("추리소설")

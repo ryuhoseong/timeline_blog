@@ -27,7 +27,7 @@ class TimelineRepositoryTest {
   void 저장() {
 
     TopicStartDt topicStartDt = new TopicStartDt("20200227");
-    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
+    TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
     Topic topic = Topic.builder()
         .name("추리소설")
