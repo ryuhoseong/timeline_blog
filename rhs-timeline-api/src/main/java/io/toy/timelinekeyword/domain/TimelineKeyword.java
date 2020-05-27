@@ -18,7 +18,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Getter
 @NoArgsConstructor
 @Entity
-public class TimeLineKeyword {
+public class TimelineKeyword {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class TimeLineKeyword {
   private LocalDateTime updDtt;
 
   @Builder
-  public TimeLineKeyword(Keyword keyword, Timeline timeline, String creId, String updId) {
+  public TimelineKeyword(Keyword keyword, Timeline timeline, String creId, String updId) {
     this.keyword = keyword == null ? new Keyword() : keyword;
     this.timeline = timeline == null ? new Timeline() : timeline;
     this.creId = creId;

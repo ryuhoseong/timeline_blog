@@ -20,7 +20,7 @@ public class LectureServiceTest {
   private LectureRepository lectureRepository;
 
   private LectureService lectureService;
-  
+
   @BeforeEach
   public void init() {
     this.lectureService = new LectureService(lectureRepository);

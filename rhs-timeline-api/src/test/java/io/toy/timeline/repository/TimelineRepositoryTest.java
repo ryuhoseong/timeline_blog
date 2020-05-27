@@ -26,18 +26,10 @@ class TimelineRepositoryTest {
   @Test
   void 저장() {
 
-    TopicStartDt topicStartDt = new TopicStartDt("2020", "02", "27");
-    TopicEndDt topicEndDt = new TopicEndDt("2020", "02", "28");
-
-    Topic topic = Topic.builder()
-        .name("추리소설")
-        .build()
-        ;
-
-    testEntityManager.persist(topic);
+    TopicStartDt topicStartDt = new TopicStartDt("20200227");
+    TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
     Timeline timeline = Timeline.builder()
-        .topic(topic)
         .title("Y의 비극")
         .subTitle("부제")
         .content("내용")
@@ -46,16 +38,9 @@ class TimelineRepositoryTest {
         .build()
         ;
 
-    Comment comment = Comment.builder()
-        .message("comment message")
-        .timeline(timeline)
-        .build()
-        ;
-
     Timeline rsTimeline = timelineRepository.save(timeline);
 
     assertEquals(timeline.getTitle(), rsTimeline.getTitle());
-    assertEquals(timeline.getTopic().getName(), rsTimeline.getTopic().getName());
 
   }
 
