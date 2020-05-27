@@ -36,13 +36,7 @@ class TimelineServiceTest {
     TopicStartDt topicStartDt = new TopicStartDt("20200227");
     TopicEndDt topicEndDt = new TopicEndDt("20200228");
 
-    Topic topic = Topic.builder()
-        .name("추리소설")
-        .build()
-        ;
-
     Timeline timeline = Timeline.builder()
-        .topic(topic)
         .title("Y의 비극")
         .subTitle("부제")
         .content("내용")
