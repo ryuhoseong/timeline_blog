@@ -51,19 +51,13 @@ public class Topic {
   public Topic(String name, Topic parent, List<Topic> child, String creId, String updId) {
     this.name = name;
     this.parent = parent;
-    this.child = child;
+    this.child = child == null ? new ArrayList<>() : child;
     this.creId = creId;
     this.updId = updId;
   }
 
-  //TODO 재확인. NULL POINT 발생이유 미확인
   public void addChildTopic(Topic topic) {
-    if (this.child == null) {
-      this.child = new ArrayList<>();
-      this.child.add(topic);
-    } else {
-      this.child.add(topic);
-    }
+    this.child.add(topic);
   }
 
   public Topic update(String name) {
