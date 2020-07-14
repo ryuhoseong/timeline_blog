@@ -48,10 +48,9 @@ public class Topic {
 
 
   @Builder
-  public Topic(String name, Topic parent, List<Topic> child, String creId, String updId) {
+  public Topic(String name, Topic parent, String creId, String updId) {
     this.name = name;
     this.parent = parent;
-    this.child = child == null ? new ArrayList<>() : child;
     this.creId = creId;
     this.updId = updId;
   }
