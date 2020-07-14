@@ -1,6 +1,7 @@
 package io.toy.topic.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Topic {
   private Topic parent;
 
   @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-  private List<Topic> child;
+  private List<Topic> child = new ArrayList<>();
 
   private String creId;
 
@@ -45,6 +46,7 @@ public class Topic {
   @UpdateTimestamp
   private LocalDateTime updDtt;
 
+
   @Builder
   public Topic(String name, Topic parent, List<Topic> child, String creId, String updId) {
     this.name = name;
@@ -54,8 +56,14 @@ public class Topic {
     this.updId = updId;
   }
 
+  //TODO 재확인. NULL POINT 발생이유 미확인
   public void addChildTopic(Topic topic) {
-    this.child.add(topic);
+    if (this.child == null) {
+      this.child = new ArrayList<>();
+      this.child.add(topic);
+    } else {
+      this.child.add(topic);
+    }
   }
 
   public Topic update(String name) {

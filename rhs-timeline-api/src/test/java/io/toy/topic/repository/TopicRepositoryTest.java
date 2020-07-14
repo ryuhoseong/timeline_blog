@@ -102,11 +102,11 @@ public class TopicRepositoryTest {
   @Test
   void 중간_TOPIC_조회() throws NotFoundException {
 
+    //given 최상위 topic 저장
     Topic parent = Topic.builder()
         .name("책")
         .build()
         ;
-
     testEntityManager.persist(parent);
 
     Topic rsParent = testEntityManager.find(Topic.class, 1L);
