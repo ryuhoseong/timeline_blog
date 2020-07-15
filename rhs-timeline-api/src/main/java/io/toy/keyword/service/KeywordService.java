@@ -11,8 +11,8 @@ public class KeywordService {
 
   private final KeywordRepository keywordRepository;
 
-  public Keyword save() {
-    return null;
+  public Keyword findByKeyword(String keyword) {
+    return keywordRepository.findByKeyword(keyword);
   }
 
 }
