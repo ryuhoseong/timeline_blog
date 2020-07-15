@@ -30,7 +30,6 @@ public class TopicDto {
       return Topic.builder()
           .name(this.name)
           .parent(this.parent)
-          .child(this.child)
           .creId(this.creId)
           .build()
           ;

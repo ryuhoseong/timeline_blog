@@ -1,6 +1,7 @@
 package io.toy.topic.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Topic {
   private Topic parent;
 
   @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-  private List<Topic> child;
+  private List<Topic> child = new ArrayList<>();
 
   private String creId;
 
@@ -45,11 +46,11 @@ public class Topic {
   @UpdateTimestamp
   private LocalDateTime updDtt;
 
+
   @Builder
-  public Topic(String name, Topic parent, List<Topic> child, String creId, String updId) {
+  public Topic(String name, Topic parent, String creId, String updId) {
     this.name = name;
     this.parent = parent;
-    this.child = child;
     this.creId = creId;
     this.updId = updId;
   }

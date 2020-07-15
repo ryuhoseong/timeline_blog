@@ -1,5 +1,7 @@
 package io.toy.keyword.domain;
 
+import static javax.persistence.FetchType.LAZY;
+
 import io.toy.timelinekeyword.domain.TimelineKeyword;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Keyword {
 
   private String keyword;
 
-  @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, fetch = LAZY)
   private List<TimelineKeyword> timelineKeywordList;
 
   private String creId;
